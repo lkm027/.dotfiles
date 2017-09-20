@@ -1,11 +1,18 @@
 call plug#begin('~/.vim/plugged')
 
+" Functionality
+Plug 'tpope/vim-commentary'
+Plug 'junegunn/vim-easy-align'
+" Plug 'valloric/youcompleteme'
+Plug 'tpope/vim-surround'
+Plug 'bronson/vim-trailing-whitespace'
 
+" Appearance/Theme
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'bronson/vim-trailing-whitespace'
-Plug 'junegunn/vim-easy-align'
 Plug 'kien/rainbow_parentheses.vim'
+
+call plug#end()
 
 set number              " Set numbers on sidebar
 set background=dark     "
@@ -56,5 +63,3 @@ let g:airline_theme='laederon'
 "au Syntax * RainbowParenthesesLoadSquare
 "au Syntax * RainbowParenthesesLoadBraces
 "au Syntax * RainbowParenthesesLoadChevrons
-
-call plug#end()

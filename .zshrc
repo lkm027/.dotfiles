@@ -109,3 +109,8 @@ alias bashrc='vim ~/.bashrc'
 alias zshrc='vim ~/.zshrc'
 alias ~='cd ~'
 alias v='cd /var/www/vhosts'
+
+# Shortcut for opening error log (1 arg: error log name)
+mtaile() {
+   multitail -cS php "/var/log/httpd/$1-error_log";
+}
