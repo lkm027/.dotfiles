@@ -138,11 +138,12 @@ getAge()
 getAge2()
 {
     while read IN; do
-        var=$(find $IN -ctime $1);
+        var=$(find $IN -atime $1);
         if [ $var ]; then
-            echo "young"
+            echo $IN "is young"
+            #command rm $IN
         else
-            echo "old"
+            echo $IN "is old"
         fi
     done
 }
@@ -150,5 +151,5 @@ getAge2()
 # find . -regex '.*.pdf'
 # Find all files ending in .pdf in the current directory
 #
-# find. -regex '\.\/\w*.pdf' | awk '{print $1}' | getAge +1
+# find. -regex '\.\/\w*.pdf' | awk '{print $1}' | getAge -1
 # 
