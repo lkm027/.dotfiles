@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugged')
 " Functionality
 Plug 'tpope/vim-commentary'
 Plug 'junegunn/vim-easy-align'
+Plug 'tpope/vim-fugitive'
 " Plug 'valloric/youcompleteme'
 Plug 'tpope/vim-surround'
 Plug 'bronson/vim-trailing-whitespace'

@@ -114,3 +114,41 @@ alias v='cd /var/www/vhosts'
 mtaile() {
    multitail -cS php "/var/log/httpd/$1-error_log";
 }
+
+# $1 File
+# $2 Time in minutes
+# Checks if a file's last access time was longer than a specified time
+# Output: If a file is older than specified time
+getAge()
+{
+    read IN
+    print $IN
+    print $1
+    var=$(find $IN -atime $1);
+    if [ $var ]; then
+        echo "young"
+    else
+        echo "old"
+    fi
+}
+
+# atime is access time and ctime is change time
+# we want to focus on access time, but for now
+# all we really can test with is change time
+getAge2()
+{
+    while read IN; do
+        var=$(find $IN -ctime $1);
+        if [ $var ]; then
+            echo "young"
+        else
+            echo "old"
+        fi
+    done
+}
+
+# find . -regex '.*.pdf'
+# Find all files ending in .pdf in the current directory
+#
+# find. -regex '\.\/\w*.pdf' | awk '{print $1}' | getAge +1
+# 
