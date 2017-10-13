@@ -138,7 +138,7 @@ getAge()
 getAge2()
 {
     while read IN; do
-        var=$(find $IN -atime $1);
+        var=$(find $IN -ctime $1);
         if [ $var ]; then
             echo $IN "is young"
             #command rm $IN
