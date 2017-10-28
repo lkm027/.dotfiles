@@ -5,6 +5,7 @@ Plug 'tpope/vim-commentary'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-fugitive'
 " Plug 'valloric/youcompleteme'
+Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'bronson/vim-trailing-whitespace'
 
@@ -64,3 +65,91 @@ let g:airline_theme='laederon'
 "au Syntax * RainbowParenthesesLoadSquare
 "au Syntax * RainbowParenthesesLoadBraces
 "au Syntax * RainbowParenthesesLoadChevrons
+"
+
+highlight Comment ctermfg=Cyan
+highlight Comment cterm=bold
+highlight MatchParen ctermbg=DarkRed
+
+" this next line is needed to enable your custom colors:
+syntax enable
+set pastetoggle=<F12>
+
+" turn off past mode when leaving insert mode
+au InsertLeave * set nopaste
+
+  " EasyAlign
+  vmap ga <Plug>(EasyAlign)
+  nmap ga <Plug>(EasyAlign)
+  let g:easy_align_delimiters =
+      \ {
+      \ 's': {
+      \       'pattern': 'C[a-z]',
+      \       'left_margin': 1,
+      \       'right_margin': 0,
+      \       'align': 'r'
+      \   },
+      \ '{': {
+      \       'pattern':      '[}]',
+      \       'left_margin':  0,
+      \       'right_margin': 0,
+      \       'stick_to_left':0
+      \   },
+      \ '}': {
+      \       'pattern':      '[}]',
+      \       'left_margin':  1,
+      \       'right_margin': 0,
+      \       'stick_to_left':0
+      \   },
+      \ '[': {
+      \       'pattern':       ']',
+      \       'left_margin':   0,
+      \       'right_margin':  0,
+      \       'stick_to_left': 0
+      \      },
+      \ ']': {
+      \       'pattern':       ']',
+      \       'left_margin':   1,
+      \       'right_margin':  0,
+      \       'stick_to_left': 0
+      \      },
+      \ '(': {
+      \       'pattern':       ')',
+      \       'left_margin':   0,
+      \       'right_margin':  0,
+      \       'stick_to_left': 0
+      \      },
+      \ ')': {
+      \       'pattern':       ')',
+      \       'left_margin':   1,
+      \       'right_margin':  0,
+      \       'stick_to_left': 0
+      \      },
+      \ '<': {
+      \       'pattern':       '<',
+      \       'left_margin':   0,
+      \       'right_margin':  0,
+      \       'stick_to_left': 0
+      \      },
+      \ '?': {
+      \       'pattern':       '[?]',
+      \       'left_margin':   0,
+      \       'right_margin':  0,
+      \       'indentation':   's',
+      \       'align':         'l'
+      \      },
+      \ ':': {
+      \       'pattern':       ':',
+      \       'left_margin':   1,
+      \       'right_margin':  1,
+      \       'stick_to_left': 0
+      \      },
+      \ '>': {
+      \       'pattern':       '<',
+      \       'left_margin':   1,
+      \       'right_margin':  0,
+      \       'stick_to_left': 0
+      \      },
+      \ }
+
+
