@@ -152,4 +152,4 @@ getAge2()
 # Find all files ending in .pdf in the current directory
 #
 # find. -regex '\.\/\w*.pdf' | awk '{print $1}' | getAge -1
-# 
+#
