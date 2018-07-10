@@ -115,6 +115,8 @@ mtaile() {
    multitail -cS php "/var/log/httpd/$1-error_log";
 }
 
+# alias mtaile='multitail -CS php --mergeall /var/log/httpd/$1*-error_log'
+
 # $1 File
 # $2 Time in minutes
 # Checks if a file's last access time was longer than a specified time
