@@ -14,6 +14,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kien/rainbow_parentheses.vim'
 
+Plug 'vim-syntastic/syntastic'
+
 call plug#end()
 
 set number              " Set numbers on sidebar
@@ -37,35 +39,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_theme='laederon'
-"let g:airline_theme='solarized'
-
-"RainbowParentheses
-"  let g:rbpt_colorpairs = [
-"      \ ['brown',       'RoyalBlue3' ],
-"      \ ['Darkblue',    'SeaGreen3'  ],
-"      \ ['darkgray',    'DarkOrchid3'],
-"      \ ['darkgreen',   'firebrick3' ],
-"      \ ['darkcyan',    'RoyalBlue3' ],
-"      \ ['darkred',     'SeaGreen3'  ],
-"      \ ['darkmagenta', 'DarkOrchid3'],
-"      \ ['brown',       'firebrick3' ],
-"      \ ['gray',        'RoyalBlue3' ],
-"      \ ['black',       'SeaGreen3'  ],
-"      \ ['darkmagenta', 'DarkOrchid3'],
-"      \ ['darkgreen',   'RoyalBlue3' ],
-"      \ ['darkcyan',    'SeaGreen3'  ],
-"      \ ['darkred',     'DarkOrchid3'],
-"      \ ['red',         'firebrick3' ],
-"      \ ]
-"let g:rbpt_max = 16
-"let g:rbpt_loadcmd_toggle = 0
-"
-"au VimEnter * RainbowParenthesesToggle
-"au Syntax * RainbowParenthesesLoadRound
-"au Syntax * RainbowParenthesesLoadSquare
-"au Syntax * RainbowParenthesesLoadBraces
-"au Syntax * RainbowParenthesesLoadChevrons
-"
 
 highlight Comment ctermfg=Cyan
 highlight Comment cterm=bold
@@ -78,78 +51,109 @@ set pastetoggle=<F12>
 " turn off past mode when leaving insert mode
 au InsertLeave * set nopaste
 
-  " EasyAlign
-  vmap ga <Plug>(EasyAlign)
-  nmap ga <Plug>(EasyAlign)
-  let g:easy_align_delimiters =
-      \ {
-      \ 's': {
-      \       'pattern': 'C[a-z]',
-      \       'left_margin': 1,
-      \       'right_margin': 0,
-      \       'align': 'r'
-      \   },
-      \ '{': {
-      \       'pattern':      '[}]',
-      \       'left_margin':  0,
-      \       'right_margin': 0,
-      \       'stick_to_left':0
-      \   },
-      \ '}': {
-      \       'pattern':      '[}]',
-      \       'left_margin':  1,
-      \       'right_margin': 0,
-      \       'stick_to_left':0
-      \   },
-      \ '[': {
-      \       'pattern':       ']',
-      \       'left_margin':   0,
-      \       'right_margin':  0,
-      \       'stick_to_left': 0
-      \      },
-      \ ']': {
-      \       'pattern':       ']',
-      \       'left_margin':   1,
-      \       'right_margin':  0,
-      \       'stick_to_left': 0
-      \      },
-      \ '(': {
-      \       'pattern':       ')',
-      \       'left_margin':   0,
-      \       'right_margin':  0,
-      \       'stick_to_left': 0
-      \      },
-      \ ')': {
-      \       'pattern':       ')',
-      \       'left_margin':   1,
-      \       'right_margin':  0,
-      \       'stick_to_left': 0
-      \      },
-      \ '<': {
-      \       'pattern':       '<',
-      \       'left_margin':   0,
-      \       'right_margin':  0,
-      \       'stick_to_left': 0
-      \      },
-      \ '?': {
-      \       'pattern':       '[?]',
-      \       'left_margin':   0,
-      \       'right_margin':  0,
-      \       'indentation':   's',
-      \       'align':         'l'
-      \      },
-      \ ':': {
-      \       'pattern':       ':',
-      \       'left_margin':   1,
-      \       'right_margin':  1,
-      \       'stick_to_left': 0
-      \      },
-      \ '>': {
-      \       'pattern':       '<',
-      \       'left_margin':   1,
-      \       'right_margin':  0,
-      \       'stick_to_left': 0
-      \      },
-      \ }
+" EasyAlign
+vmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+let g:easy_align_delimiters =
+  \ {
+  \ 's': {
+  \       'pattern': 'C[a-z]',
+  \       'left_margin': 1,
+  \       'right_margin': 0,
+  \       'align': 'r'
+  \   },
+  \ '{': {
+  \       'pattern':      '[}]',
+  \       'left_margin':  0,
+  \       'right_margin': 0,
+  \       'stick_to_left':0
+  \   },
+  \ '}': {
+  \       'pattern':      '[}]',
+  \       'left_margin':  1,
+  \       'right_margin': 0,
+  \       'stick_to_left':0
+  \   },
+  \ '[': {
+  \       'pattern':       ']',
+  \       'left_margin':   0,
+  \       'right_margin':  0,
+  \       'stick_to_left': 0
+  \      },
+  \ ']': {
+  \       'pattern':       ']',
+  \       'left_margin':   1,
+  \       'right_margin':  0,
+  \       'stick_to_left': 0
+  \      },
+  \ '(': {
+  \       'pattern':       ')',
+  \       'left_margin':   0,
+  \       'right_margin':  0,
+  \       'stick_to_left': 0
+  \      },
+  \ ')': {
+  \       'pattern':       ')',
+  \       'left_margin':   1,
+  \       'right_margin':  0,
+  \       'stick_to_left': 0
+  \      },
+  \ '<': {
+  \       'pattern':       '<',
+  \       'left_margin':   0,
+  \       'right_margin':  0,
+  \       'stick_to_left': 0
+  \      },
+  \ '?': {
+  \       'pattern':       '[?]',
+  \       'left_margin':   0,
+  \       'right_margin':  0,
+  \       'indentation':   's',
+  \       'align':         'l'
+  \      },
+  \ ':': {
+  \       'pattern':       ':',
+  \       'left_margin':   1,
+  \       'right_margin':  1,
+  \       'stick_to_left': 0
+  \      },
+  \ '>': {
+  \       'pattern':       '<',
+  \       'left_margin':   1,
+  \       'right_margin':  0,
+  \       'stick_to_left': 0
+  \      },
+  \ }
 
+" Syntastic
+source /etc/profile.d/vimrc/plugins/syntastic.vim
 
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_mode="active"
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list            = 1
+let g:syntastic_check_on_open            = 1
+let g:syntastic_auto_jump                = 3
+let g:syntastic_check_on_wq              = 0
+let g:syntastic_auto_jump                = 1
+let g:syntastic_error_symbol             = "✗"
+let g:syntastic_style_error_symbol       = "✗"
+let g:syntastic_warning_symbol           = "⚠"
+let g:syntastic_style_warning_symbol     = "⚠"
+let g:syntastic_typescript_checkers      = ["tslint"]
+let g:syntastic_typescript_tslint_args   = "--config ~/.tslint.json"
+let g:syntastic_mode_map = {
+  \ "mode": "passive",
+  \ "active_filetypes": ["php", "typescript"] }
+let g:syntastic_eruby_ruby_quiet_messages =
+  \ {'regex': 'possibly useless use of a variable in void context'}
+
+au Filetype javascript let g:syntastic_aggregate_errors=1
+au Filetype php let g:syntastic_aggregate_errors=0
+au Filetype perl let g:syntastic_aggregate_errors=0
+au Filetype perl nnoremap <silent> <F7> :call PerlTidy()<CR>
+
+set undofile " Maintain undo history between sessions
+set undodir=~/.dotfiles/undodir
