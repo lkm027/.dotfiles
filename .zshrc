@@ -153,3 +153,4 @@ getAge2()
 #
 # find. -regex '\.\/\w*.pdf' | awk '{print $1}' | getAge -1
 # 
+# export PYTHONPATH=$PYTHONPATH:"/home/lucas/libraries"

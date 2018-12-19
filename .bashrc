@@ -15,7 +15,9 @@ cd() {
 	builtin cd "$@" && ls;
 }
 # Configure the prompt interface
-export PS1="\[\033[38;5;10m\][\u@\h\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;165m\]\W\[$(tput sgr0)\]\[\033[38;5;10m\]]\[$(tput sgr0)\]\[\033[38;5;165m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
+if [[ $- == *i* ]]; then
+    export PS1="\[\033[38;5;10m\][\u@\h\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;165m\]\W\[$(tput sgr0)\]\[\033[38;5;10m\]]\[$(tput sgr0)\]\[\033[38;5;165m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
+fi
 
 # Aliases #############################
 
@@ -37,3 +39,5 @@ alias ....='cd ../../..'
 alias vimrc='vim ~/.vimrc'
 alias bashrc='vim ~/.bashrc'
 alias ~='cd ~'
+
+# export PYTHONPATH=$PYTHONPATH:"/home/lucas/libraries"
