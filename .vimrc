@@ -4,7 +4,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-commentary'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-fugitive'
-" Plug 'valloric/youcompleteme'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'bronson/vim-trailing-whitespace'
@@ -13,6 +12,7 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kien/rainbow_parentheses.vim'
+Plug 'flazz/vim-colorschemes'
 
 Plug 'vim-syntastic/syntastic'
 
@@ -35,14 +35,14 @@ set hlsearch            " highlight matches
 
 set laststatus=2
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_theme='laederon'
+" Appearance
+let g:airline#extensions#tabline#enabled=1
+let g:airline_theme='dark'
+let g:airline_powerline_fonts = 1
+colorscheme molokai
 
 highlight Comment ctermfg=Cyan
 highlight Comment cterm=bold
-highlight MatchParen ctermbg=DarkRed
 
 " this next line is needed to enable your custom colors:
 syntax enable
@@ -126,7 +126,8 @@ let g:easy_align_delimiters =
   \ }
 
 " Syntastic
-source /etc/profile.d/vimrc/plugins/syntastic.vim
+" Keep this commented if there is no file to source
+" source /etc/profile.d/vimrc/plugins/syntastic.vim
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
