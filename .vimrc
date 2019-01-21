@@ -158,3 +158,6 @@ au Filetype perl nnoremap <silent> <F7> :call PerlTidy()<CR>
 
 set undofile " Maintain undo history between sessions
 set undodir=~/.dotfiles/undodir
+
+" Ruby File Spacing
+autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
