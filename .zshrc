@@ -155,3 +155,15 @@ getAge2()
 #
 # find. -regex '\.\/\w*.pdf' | awk '{print $1}' | getAge -1
 # export PYTHONPATH=$PYTHONPATH:"/home/lucas/libraries"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Path additions for react native
+export JAVA_HOME=$HOME/android-studio/jre
+export PATH=$PATH:$JAVA_HOME/bin
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools

@@ -16,6 +16,9 @@ Plug 'kien/rainbow_parentheses.vim'
 
 Plug 'vim-syntastic/syntastic'
 
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+
 call plug#end()
 
 set number              " Set numbers on sidebar
@@ -126,7 +129,7 @@ let g:easy_align_delimiters =
   \ }
 
 " Syntastic
-source /etc/profile.d/vimrc/plugins/syntastic.vim
+" source /etc/profile.d/vimrc/plugins/syntastic.vim
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -157,3 +160,5 @@ au Filetype perl nnoremap <silent> <F7> :call PerlTidy()<CR>
 
 set undofile " Maintain undo history between sessions
 set undodir=~/.dotfiles/undodir
+
+au BufRead,BufNewFile,BufEnter /home/lucas/SportsAreCool/* setlocal ts=2 sts=2 sw=2
