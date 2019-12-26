@@ -20,6 +20,9 @@ Plug 'vim-syntastic/syntastic'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 
+" Vdebug
+Plug 'joonty/vdebug'
+
 call plug#end()
 
 set number              " Set numbers on sidebar
@@ -38,6 +41,8 @@ set incsearch           " search as characters are enabled
 set hlsearch            " highlight matches
 
 set laststatus=2
+set bs=2
+set tabpagemax=100
 
 " Appearance
 let g:airline#extensions#tabline#enabled=1
@@ -131,7 +136,7 @@ let g:easy_align_delimiters =
 
 " Syntastic
 " Keep this commented if there is no file to source
-" source /etc/profile.d/vimrc/plugins/syntastic.vim
+source /etc/profile.d/vimrc/plugins/syntastic.vim
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -151,7 +156,7 @@ let g:syntastic_typescript_checkers      = ["tslint"]
 let g:syntastic_typescript_tslint_args   = "--config ~/.tslint.json"
 let g:syntastic_mode_map = {
   \ "mode": "passive",
-  \ "active_filetypes": ["php", "typescript"] }
+  \ "active_filetypes": ["typescript"] }
 let g:syntastic_eruby_ruby_quiet_messages =
   \ {'regex': 'possibly useless use of a variable in void context'}
 
@@ -166,3 +171,10 @@ set undodir=~/.dotfiles/undodir
 au BufRead,BufNewFile,BufEnter /home/lucas/SportsAreCool/* setlocal ts=2 sts=2 sw=2
 " Ruby File Spacing
 autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
+
+" Vdebug config
+" Prevents Vdebug from automatically breaking on first line of PHP execution (router.php in our case)
+let g:vdebug_options = {
+\    'break_on_open' : 0,
+\    'continuous_mode' : 0,
+\}

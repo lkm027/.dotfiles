@@ -95,6 +95,7 @@ alias mv='mv -i'
 alias cp='cp -i'
 
 alias cl='clear && ls'
+alias empty='clear'
 alias la='ls -a'
 alias ll='ls -l'
 
@@ -113,6 +114,44 @@ alias v='cd /var/www/vhosts'
 # Shortcut for opening error log (1 arg: error log name)
 mtaile() {
    multitail -cS php "/var/log/httpd/$1-error_log";
+}
+
+# Shortcut for running eslint on all changed js files
+lintjs() {
+    git diff-index --name-only HEAD | grep -e \.js | paste -sd " " | xargs eslint -c /etc/profile.d/vimrc/plugins/syntastic_checkers/eslintrc.js
+}
+
+#updates .db and .customer files (credit to David Wright for inspiration)
+#usage: cust {customer} {db version OR ticket (if a ticket DB exists)}
+#if no second argument is supplied, uses customer named DB
+cust() {
+    first_char="$(echo $2 | head -c 1)"
+
+    # versioned databases default to {customer}_XERP-{ticket #}
+    if [[ $# == 1 ]]; then
+        argument_version=$( printf "%s" $1 )
+    elif [[ "$first_char" == "X" ]]; then
+        argument_version=$( printf "%s" $1 "_" $2)
+    else
+        #gets version by year
+        version=$(($(date +'%Y') - 2012))
+        version=$((10#${version}))
+        #parses release to two characters
+        release=$(printf %02d $2)
+        argument_version=$( printf "%s" $1 "_v" $version "." $release)
+    fi
+
+    current_customer=$1
+    current_db="athena.internal\n5432\n$argument_version"
+
+    #if db and customer files exist, write them
+    if [ -f ./.customer ]; then
+        printf "$current_customer" > ".customer"
+    fi
+
+    if [ -f ./.db ]; then
+        printf "$current_db" > ".db"
+    fi
 }
 
 # alias mtaile='multitail -CS php --mergeall /var/log/httpd/$1*-error_log'
@@ -167,3 +206,6 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# export NVM_DIR="/home/lucas/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
