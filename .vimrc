@@ -135,9 +135,6 @@ let g:easy_align_delimiters =
   \ }
 
 " Syntastic
-" Keep this commented if there is no file to source
-source /etc/profile.d/vimrc/plugins/syntastic.vim
-
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -168,7 +165,6 @@ au Filetype perl nnoremap <silent> <F7> :call PerlTidy()<CR>
 set undofile " Maintain undo history between sessions
 set undodir=~/.dotfiles/undodir
 
-au BufRead,BufNewFile,BufEnter /home/lucas/SportsAreCool/* setlocal ts=2 sts=2 sw=2
 " Ruby File Spacing
 autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
 
@@ -178,3 +174,13 @@ let g:vdebug_options = {
 \    'break_on_open' : 0,
 \    'continuous_mode' : 0,
 \}
+
+" virtual machine settings
+if system( 'hostname' ) == 'lucas.internal'
+    " Syntastic
+    source /etc/profile.d/vimrc/plugins/syntastic.vim
+" Local
+else
+    au BufRead,BufNewFile,BufEnter /home/lucas/SportsAreCool/* setlocal ts=2 sts=2 sw=2
+
+endif
