@@ -134,34 +134,6 @@ let g:easy_align_delimiters =
   \      },
   \ }
 
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_mode="active"
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list            = 1
-let g:syntastic_check_on_open            = 1
-let g:syntastic_auto_jump                = 3
-let g:syntastic_check_on_wq              = 0
-let g:syntastic_auto_jump                = 1
-let g:syntastic_error_symbol             = "✗"
-let g:syntastic_style_error_symbol       = "✗"
-let g:syntastic_warning_symbol           = "⚠"
-let g:syntastic_style_warning_symbol     = "⚠"
-let g:syntastic_typescript_checkers      = ["tslint"]
-let g:syntastic_typescript_tslint_args   = "--config ~/.tslint.json"
-let g:syntastic_mode_map = {
-  \ "mode": "passive",
-  \ "active_filetypes": ["typescript"] }
-let g:syntastic_eruby_ruby_quiet_messages =
-  \ {'regex': 'possibly useless use of a variable in void context'}
-
-au Filetype javascript let g:syntastic_aggregate_errors=1
-au Filetype php let g:syntastic_aggregate_errors=0
-au Filetype perl let g:syntastic_aggregate_errors=0
-au Filetype perl nnoremap <silent> <F7> :call PerlTidy()<CR>
-
 set undofile " Maintain undo history between sessions
 set undodir=~/.dotfiles/undodir
 
@@ -176,11 +148,39 @@ let g:vdebug_options = {
 \}
 
 " virtual machine settings
-if system( 'hostname' ) == 'lucas.internal'
+if substitute( system( 'hostname' ), '\n', '', '' ) == 'lucas.internal'
     " Syntastic
     source /etc/profile.d/vimrc/plugins/syntastic.vim
+
+    " Syntastic
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+    let g:syntastic_mode="active"
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list            = 1
+    let g:syntastic_check_on_open            = 1
+    let g:syntastic_auto_jump                = 3
+    let g:syntastic_check_on_wq              = 0
+    let g:syntastic_auto_jump                = 1
+    let g:syntastic_error_symbol             = "✗"
+    let g:syntastic_style_error_symbol       = "✗"
+    let g:syntastic_warning_symbol           = "⚠"
+    let g:syntastic_style_warning_symbol     = "⚠"
+    let g:syntastic_typescript_checkers      = ["tslint"]
+    let g:syntastic_typescript_tslint_args   = "--config ~/.tslint.json"
+    let g:syntastic_mode_map = {
+      \ "mode": "passive",
+      \ "active_filetypes": ["typescript"] }
+    let g:syntastic_eruby_ruby_quiet_messages =
+      \ {'regex': 'possibly useless use of a variable in void context'}
+
+    au Filetype javascript let g:syntastic_aggregate_errors=1
+    au Filetype php let g:syntastic_aggregate_errors=0
+    au Filetype perl let g:syntastic_aggregate_errors=0
+    au Filetype perl nnoremap <silent> <F7> :call PerlTidy()<CR>
+
 " Local
 else
     au BufRead,BufNewFile,BufEnter /home/lucas/SportsAreCool/* setlocal ts=2 sts=2 sw=2
-
 endif
